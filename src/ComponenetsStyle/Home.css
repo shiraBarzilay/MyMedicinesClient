@@ -1,0 +1,66 @@
+body{
+    background-image:url("../assets/כפית תמונת הבית.jpg");
+    background-repeat: no-repeat;
+    background-color: aquamarine;
+    margin-top: 0%;
+    width:100%!important;
+    height:100px!important;
+    /* margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    margin-right: 0%; */
+    background-color: #bfebf8;
+}
+nav{
+    background-color: #bfebf8!important;
+}
+
+image{
+    margin-top: 0%;
+    width: 100%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    height: 500px!important;
+}
+.inp{
+    border:2px solid rgb(247, 192, 192);        
+    border-radius: 8px;
+    width: 200px;
+    height: 50px;
+    color: rgb(22, 22, 108);
+}
+/* .inp:active{
+    border:2px solid #ff7961;        
+    border-radius: 8px;
+    width: 200px;
+    height: 50px;
+} */
+.detailInput{
+ margin-top: 70px!important;
+    margin-right: 1150px;
+}
+#inp1{
+    margin-left: 15px;
+}
+.button {
+    background-color: rgb(247, 192, 192);
+    width: 170px;
+    height: 50px;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+margin-top: 30px;
+margin-right: 1270px;
+    cursor: pointer;
+    border-radius: 16px;
+  }
+  .textWrite{
+    color:white;
+    font-size: 45px;
+    margin-top: 120px;
+    margin-right: 1000px;
+  }
