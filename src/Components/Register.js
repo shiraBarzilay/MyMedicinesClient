@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 import "../ComponenetsStyle/Register.css"
+import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { addUser } from '../store/actions/user';
 
 export default function Register(){
+
 let [user,setUser]=useState({
     UserFirstName:"",
     UserLastName:"",
@@ -14,6 +18,11 @@ let [user,setUser]=useState({
 });
 let [errorsMessage,setErrorsMessage]=useState({});
 // let navigate=useNavigate();
+
+// let dispatch=useDispatch();//מעדכן בסטיט הכללי
+
+
+
 
 const changeInput=(e)=>{
     let inputName=e.target.name;
@@ -45,32 +54,28 @@ const register=(e)=>{
     console.log(errorsMessage)
 }
     else{
-    alert("success");
+    // axios.post("http://localhost:3000/user",user).then(res=>{
+    // dispatch(addUser(user));
+    // })
+    console.log("register!!")
     console.log(errorsMessage)
 
 }
 }
 return(
     <>
+    
     <div className='detailInput'>
-           <input type="text" className="inp" name='UserFirstName' placeholder="שם פרטי"/>
+        <h3>עלייך להרשם!</h3>
+           <input type="text" className="inp" name='UserFirstName' placeholder="שם פרטי" />
            <input type="text" className="inp" name='UserLastName' placeholder="שם משפחה"/>
            <input type="password" className="inp" name='UserPassword' placeholder="סיסמא" onChange={changeInput}/>
            <input type="email" className="inp" name='UserEmail'  placeholder="מייל"/>
+           <label>תאריך לידה</label>
            <input type="date" className="inp" name='UserBirthDate'  placeholder="תאריך לידה"/>
-           <input type="text" className="inp" name='UserAddress'  placeholder="כתובת"/>
+          
+           <input type="text" className="inp" name='UserAddress'  placeholder="כתובת"/> 
            <input type="text" className="inp" name='UserCity'  placeholder="עיר"/>
-
-        {/* <h1>Hello,Please Register!</h1>
-    <Box>
-   <TextField id="standard-basic" label="Name" name="name" variant="standard" onChange={changeInput} />
-   <TextField id="standard-basic" label="Password"  name="password" type="password" variant="standard" onChange={changeInput} />
-   <TextField id="standard-basic" label="Age"  name="age" variant="standard" />
-   <TextField id="standard-basic" label="City" name="city" variant="standard" />
-   <TextField id="standard-basic" label="Address" name="address" variant="standard" />
-   <TextField id="standard-basic" label="Email" name="email" type="email" variant="standard"  />
-   <Button variant="outlined" onClick={register}>Register</Button>
- </Box> */}
    </div>
    <input type="button" class="button" value="הרשמה" onClick={register}/>
    </>

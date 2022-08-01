@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../ComponenetsStyle/Navbar.css";
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 
 export default function NavbarUser(){
 
@@ -12,9 +12,6 @@ return(
             <li className="nav-item">
                 <Link to="/home" style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >דף הבית</Link>
             </li>
-            {/* <li className="nav-item">
-                <Link to="/login" className="nav-link" >כניסה</Link>
-            </li> */}
             <li className="nav-item">
                 <Link to="/register"  style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >התחברות</Link>
             </li>
@@ -27,7 +24,7 @@ return(
             </ul>
             </div>
             </nav >
-              <Outlet />
+              {/* <Outlet /> */}
         </div>
 )
       

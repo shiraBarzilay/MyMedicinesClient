@@ -9,8 +9,10 @@ export default function Home(){
         <div className="detailInput">
     <input type="email" className="inp" id="inp1" placeholder="מייל"/>
     <input type="password" className="inp" placeholder="סיסמא"/>   
- </div>
+  </div>
  <input type="button" className="button" value="התחברות"/>
+ 
         </>
+       
     )
 }

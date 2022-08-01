@@ -4,16 +4,24 @@
     width: 200px;
     height: 50px;
     color: rgb(22, 22, 108);
+    margin-bottom: 5px!important;
+    margin-top: 5px!important;
+    margin-left: 10px!important;
 }
-#inp1{
-    margin-left: 15px;
+::placeholder{
+    color:rgb(22, 22, 108)!important;
+}
+label{
+    margin-left: 30px!important;
+    margin-right: 30px!important;
+    color:rgb(22, 22, 108)!important;
 }
 .button {
     background-color: rgb(247, 192, 192);
     width: 170px;
     height: 50px;
     border: none;
-    color: black;
+    color: rgb(22, 22, 108);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -24,9 +32,11 @@
     border-radius: 16px;
   }
   .detailInput{
-    margin-top:350px;
+    margin-top:170px!important;
     margin-right: 1150px;
 }
-body{
-    background-color: rgb(71, 16, 51);
+h3{
+    color: rgb(22, 22, 108);
+    margin-right: 120px!important;
+    margin-bottom: 22px;
 }
