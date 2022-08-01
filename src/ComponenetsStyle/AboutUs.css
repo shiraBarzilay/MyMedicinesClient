@@ -1,12 +1,16 @@
-p{
-    color: rgb(22, 22, 108);
-    font-size: 25px;
-}
 h2{
     color: rgb(22, 22, 108);
 }
 .aboutDetails{
-    margin-right:900px;
-    margin-top: 130px;
-    line-height: 50px;
+    text-align:center;
+    align-items: center;
+    margin-right:57%;
+    margin-left: 8%;
+    margin-top: 4%;
+    line-height: 320%;
 }
+.aboutDetails div{
+    color: rgb(22, 22, 108);
+    font-size: 25px;
+}
+
