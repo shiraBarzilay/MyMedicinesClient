@@ -7,7 +7,7 @@ const initialState={
 
 export const medicineReducer=(state=initialState,action)=>{
 switch(action.type){
-    case Types.ADD_MEDICINE:
+    case Types.ADD_NEW_MEDICINE:
         return {
           medicinesArr:[state.medicinesArr,action.payload]  
         }
@@ -15,6 +15,7 @@ switch(action.type){
         return{
             medicinesArr:action.payload
         }
+    default :return state;
 }
 }
 
