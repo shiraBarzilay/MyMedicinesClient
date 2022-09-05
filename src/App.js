@@ -1,4 +1,3 @@
-
 import Home from "./Components/Home";
 import Register from "./Components/Register";
 import { Routes ,Route} from "react-router-dom";

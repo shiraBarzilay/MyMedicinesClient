@@ -1,11 +1,23 @@
 body{
-    background-image:url("../assets/כפית תמונת הבית.jpg");
+    background-image:url("../assets/כפית תמונת 1הבית.jpg");
     background-repeat: no-repeat;
-    background-color: aquamarine;
     margin-top: 0%;
     width:100%!important;
     height:100px!important;
-    background-color: #bfebf8;
+    background-color: white;
+  
+/*     
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+
+
 }
 nav{
     background-color: #bfebf8!important;
