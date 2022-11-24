@@ -1,6 +1,13 @@
 import "../ComponenetsStyle/MedicationLog.css";
 
+//יומן תרופות
 export default function MedicationLog(){
+
+
+ const changeColor=()=>{
+ this.backgroundColor="red"
+ }
+
  return(
     <>
     <table >
@@ -13,7 +20,7 @@ export default function MedicationLog(){
     <th>שישי</th>
   </tr>
   <tr>
-    <td>10:00</td>
+    <button onClick={changeColor}>10:00</button>
     <td>10:00</td>
     <td>10:00</td>
     <td>10:00</td>

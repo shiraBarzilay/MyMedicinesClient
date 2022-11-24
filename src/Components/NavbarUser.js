@@ -11,7 +11,6 @@ export default function NavbarUser() {
             <Link to="/aboutUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link3" >אודות</Link>
             <Link to="/contactUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link5" >צור קשר</Link>
             <Link to="/medicationLog" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link6" >יומן תרופות</Link>
-            {/* <Outlet /> */}
         </div>
     )
 }
