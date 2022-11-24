@@ -1,0 +1,16 @@
+table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    font-size: 30px!important;
+    /* width: 80px; */
+    margin-right: 520px;
+    margin-top: 10px;
+  }
+  th, td {
+    background-color: #96D4D4;
+   font-size: 40px;
+   margin-left: 2px!important;
+  }
+  body{
+  background-image: none!important;
+  }

@@ -1,3 +1,40 @@
-body{
+div {
     direction: rtl;
+    margin-top: 1.5% !important;
+}
+
+.nav-link1 {
+    margin-right: 2%;
+    margin-left: -2% !important;
+    margin-bottom: 90% !important;
+
+}
+
+.nav-link2 {
+    margin-right: 3%;
+    margin-left: -2% !important;
+    margin-top: 55% !important;
+}
+
+.nav-link3 {
+    margin-right: 3%;
+    margin-left: -2% !important;
+    margin-top: 55% !important;
+}
+
+.nav-link4 {
+    margin-right: 3%;
+    margin-left: -2% !important;
+    margin-top: 55% !important;
+}
+
+.nav-link5 {
+    margin-right: 3%;
+    margin-left: -2% !important;
+    margin-top: 55% !important;
+}
+.nav-link6 {
+    margin-right: 3%;
+    margin-left: -2% !important;
+    margin-top: 55% !important;
 }

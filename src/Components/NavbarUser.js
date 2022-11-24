@@ -1,31 +1,17 @@
 import { Link } from "react-router-dom";
 import "../ComponenetsStyle/Navbar.css";
-// import { Outlet } from "react-router-dom";
 
-export default function NavbarUser(){
-
-return(
-    <div className="bbody">
-    <nav className="navbar navbar-expand-sm bg-light">
-    <div className="container-fluid">
-        <ul className="navbar-nav">
-            <li className="nav-item">
-                <Link to="/home" style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >דף הבית</Link>
-            </li>
-            <li className="nav-item">
-                <Link to="/register"  style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >התחברות</Link>
-            </li>
-            <li className="nav-item">
-                <Link to="/aboutUs"  style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >אודות</Link>
-            </li>
-            <li className="nav-item">
-                <Link to="/contactUs"  style={{textDecoration: 'none',color:'#00008B',fontSize:'23px'}} className="nav-link" >צור קשר</Link>
-            </li>
-            </ul>
-            </div>
-            </nav >
-              {/* <Outlet /> */}
+export default function NavbarUser() {
+//alt + shift + f סידור קוד
+    return (
+        <div>
+            <Link to="/home" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link1" >דף הבית</Link>
+            <Link to="/register" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link2" >התחברות</Link>
+            <Link to="/medicines" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link4" >תרופות</Link>
+            <Link to="/aboutUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link3" >אודות</Link>
+            <Link to="/contactUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link5" >צור קשר</Link>
+            <Link to="/medicationLog" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link6" >יומן תרופות</Link>
+            {/* <Outlet /> */}
         </div>
-)
-      
+    )
 }
