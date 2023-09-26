@@ -1,4 +1,4 @@
-
+/* 
 .App {
   text-align: center;
 }
@@ -36,6 +36,20 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.wrap-app {
+  direction: rtl;
+  display: grid;
 }
 
-                                                                                                                                                                      
+h1, h2, h3, h4, h5, h6,
+label, p, span, a, div, button {
+  font-family: assistant !important;
+}
+
+.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root{
+  left: inherit !important;
+  right: 1.75rem !important;
+  transform-origin: right !important;
+}                                                                                                                                                                  

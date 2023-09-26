@@ -1,0 +1,20 @@
+.contacDetails {
+    width: 40rem;
+    margin-inline: auto;
+    padding: 5rem 1rem;
+
+    p {
+        color: rgb(22, 22, 108);
+        font-size: 19px;
+        line-height: 40px;
+    }
+
+    h1 {
+        color: rgb(22, 22, 108);
+        margin-bottom: 1.5rem;
+    }
+    
+    svg {
+        margin-left: 6px;
+    }
+}

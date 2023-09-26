@@ -1,4 +1,5 @@
 export const ADD_NEW_USER="ADD_NEW_USER";
+export const LOGIN="LOGIN";
 export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER";
 export const DELETE_USER="DELETE_USER";
 

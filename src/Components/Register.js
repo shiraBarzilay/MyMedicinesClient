@@ -1,83 +1,97 @@
 import * as React from 'react';
 import { useState } from 'react';
-import "../ComponenetsStyle/Register.css"
-import axios from "axios";
-import { useDispatch } from 'react-redux';
-import { addUser } from '../store/actions/user';
+import "../ComponenetsStyle/Register.scss"
+import { connect, useDispatch } from 'react-redux';
+import { addNewUser } from '../store/actions/user';
+import { ExclamationTriangleFill } from 'react-bootstrap-icons';
+import utils from '../utils';
+import { useNavigate } from 'react-router-dom';
 
-export default function Register(){
+const Register = (props) => {
 
-let [user,setUser]=useState({
-    UserFirstName:"",
-    UserLastName:"",
-    UserPassword:"",
-    UserEmail:"",
-    UserBirthDate:"",
-    UserAddress:"",
-    UserCity:""
-});
-let [errorsMessage,setErrorsMessage]=useState({});
-// let navigate=useNavigate();
+    let [user, setUser] = useState({
+        UserFirstName: "",
+        UserLastName: "",
+        UserPassword: "",
+        UserEmail: "",
+        UserBirthDate: "",
+        UserAddress: "",
+        UserCity: ""
+    });
+    let [errorsMessage, setErrorsMessage] = useState([]);
 
-// let dispatch=useDispatch();//מעדכן בסטיט הכללי
+    const navigate = useNavigate();
+
+    // let dispatch=useDispatch();//מעדכן בסטיט הכללי
 
 
 
 
-const changeInput=(e)=>{
-    let inputName=e.target.name;
-    let inputValue=e.target.value;
-    setUser({...user,[inputName]:inputValue})
-}
-const validation=()=>{
-    let newErrorsMessage={};
-    let isValidation=true;
-    // if(!user.name||!user.name.trim()){
-    //     isValidation=false;
-    //     newErrorsMessage.name={message:"שדה חובה"};
-    // }
-    if(!user.UserPassword){
-        isValidation=false;
-        newErrorsMessage.UserPassword={message:"שדה חובה"};
+    const changeInput = (event) => {
+        const { name, value } = event.target;
+        setUser({ ...user, [name]: value });
     }
-    if(user.UserPassword.length<5 ||!(/(?=[A-Z]*)(?=[a-z]*)(?=[0-9]*)/.test(user.UserPassword))){
-        isValidation=false;
-        newErrorsMessage.UserPassword={message:"סיסמא לא תקינה"} 
+    const validation = () => {
+        let newErrorsMessage = [];
+        let isValidation = true;
+        // if(!user.name||!user.name.trim()){
+        //     isValidation=false;
+        //     newErrorsMessage.name={message:"שדה חובה"};
+        // }
+        console.log(user);
+        if (!user.UserPassword || !user.UserEmail) {
+            isValidation = false;
+            newErrorsMessage.push("מייל וסיסמה אלו שדות חובה");
+        }
+        if (user.UserPassword.length < 5 || !(/(?=[A-Z]*)(?=[a-z]*)(?=[0-9]*)/.test(user.UserPassword))) {
+            isValidation = false;
+            newErrorsMessage.push("סיסמא לא תקינה");
+        }
+        setErrorsMessage(newErrorsMessage);
+        return isValidation;
     }
-    setErrorsMessage(newErrorsMessage);
-    return isValidation;
-}
-const register=(e)=>{
-     e.preventDefault();
-    if(!validation()){
-    alert("Something Broken")
-    console.log(errorsMessage)
-}
-    else{
-    // axios.post("http://localhost:3000/user",user).then(res=>{
-    // dispatch(addUser(user));
-    // })
-    console.log("register!!")
-    console.log(errorsMessage)
 
+    const register = async (e) => {
+        e.preventDefault();
+        if (validation()) {
+            let result = await utils.signUp(user);
+            console.log(result);
+            if (result.data != null && result.data != "") {
+                props.signUp(user);
+                navigate("/medicationLog");
+            }
+            else {
+                setErrorsMessage(["כתובת המייל שהוזנה כבר רשומה באתר"]);
+            }
+        }
+    }
+    return (
+        <div className="wrap-register">
+
+            <form className='detailInput'>
+                <h3>עלייך להרשם!</h3>
+                <input type="text" className="inp" name='UserFirstName' placeholder="שם פרטי" onChange={changeInput} />
+                <input type="text" className="inp" name='UserLastName' placeholder="שם משפחה" onChange={changeInput} />
+                <input type="password" className="inp" name='UserPassword' placeholder="סיסמא" onChange={changeInput} />
+                <input type="email" className="inp" name='UserEmail' placeholder="מייל" onChange={changeInput} />
+                <label>תאריך לידה</label>
+                <input type="date" className="inp" name='UserBirthDate' placeholder="תאריך לידה" onChange={changeInput} />
+
+                <input type="text" className="inp" name='UserAddress' placeholder="כתובת" onChange={changeInput} />
+                <input type="text" className="inp" name='UserCity' placeholder="עיר" onChange={changeInput} />
+
+                {errorsMessage.length != 0 && <div className="result">
+                    {errorsMessage.map((error, i) => <p key={i}><ExclamationTriangleFill /> {error}</p>)}
+                </div>}
+                <input type="button" className="button" value="הרשמה" onClick={register} />
+            </form>
+            <p>משתמש רשום? עבור ל<a href="/home" className="link">התחברות</a></p>
+        </div>
+    )
 }
-}
-return(
-    <>
-    
-    <div className='detailInput'>
-        <h3>עלייך להרשם!</h3>
-           <input type="text" className="inp" name='UserFirstName' placeholder="שם פרטי" />
-           <input type="text" className="inp" name='UserLastName' placeholder="שם משפחה"/>
-           <input type="password" className="inp" name='UserPassword' placeholder="סיסמא" onChange={changeInput}/>
-           <input type="email" className="inp" name='UserEmail'  placeholder="מייל"/>
-           <label>תאריך לידה</label>
-           <input type="date" className="inp" name='UserBirthDate'  placeholder="תאריך לידה"/>
-          
-           <input type="text" className="inp" name='UserAddress'  placeholder="כתובת"/> 
-           <input type="text" className="inp" name='UserCity'  placeholder="עיר"/>
-   </div>
-   <input type="button" class="button" value="הרשמה" onClick={register}/>
-   </>
-)    
-}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: (user) => dispatch(addNewUser(user))
+    };
+};
+export default connect(null, mapDispatchToProps)(Register);

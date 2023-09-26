@@ -8,14 +8,17 @@ import { userReducer } from './store/reducer/user';
 import { medicineReducer } from './store/reducer/medicine';
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
 
-// let myStore=createStore(combinReducer({u:userReducer,m:medicineReducer}),composeWithDevTools())
- ReactDOM.render(
-  <React.StrictMode>    
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-    
+let myStore = createStore(combineReducers({ userReducer, medicineReducer }), composeWithDevTools());
+// const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={myStore}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

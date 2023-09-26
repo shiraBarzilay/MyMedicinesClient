@@ -1,0 +1,60 @@
+.wrap-register {
+    margin: 7vh auto;
+
+    form {
+        margin-block: 1rem;
+        display: grid;
+        grid-row-gap: 1rem;
+        width: 18rem;
+
+        .inp {
+            border: 2px solid #f7c0c0;
+            border-radius: 8px;
+            color: #16166c !important;
+            padding: 0.6rem 1rem;
+        }
+
+        .button {
+            background-color: #f7c0c0;
+            
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 2rem;
+            background: #16166c;
+        }
+
+        .result p {
+            font-size: 15px !important;
+            color: red;
+            svg {
+                margin-left: 6px;
+            }
+        }
+    }
+
+    &>p {
+        font-size: 18px;
+
+        .link {
+            color: #cf8787;
+        }
+    }
+
+    ::placeholder {
+        color: rgb(22, 22, 108) !important;
+    }
+
+    label {
+        margin-left: 30px !important;
+        margin-right: 30px !important;
+        color: rgb(22, 22, 108) !important;
+    }
+
+    h3 {
+        color: rgb(22, 22, 108);
+    }
+}

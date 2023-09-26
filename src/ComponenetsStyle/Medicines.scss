@@ -1,0 +1,68 @@
+.wrap-medicines-page {
+    padding: 5vh 10vh;
+
+    .title {
+        color: #00008b;
+        margin: 0 1rem 2rem;
+    }
+
+    .search-box {
+        margin-right: auto;
+    }
+
+    .wrap-medicines {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .buttonAddMedicine, .buttonClose, .submitButton {
+        border: none;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 2rem;
+        background: #16166c;
+
+        svg {
+            font-size: 18px;
+        }
+    }
+
+    .buttonAddMedicine, .buttonClose {
+        margin-top: 1rem;
+    }
+
+    .buttonClose {
+        background-color: gray;
+    }
+
+    .wrap-inputs {
+        padding-block: 1.5rem 1rem;
+        display: grid;
+        width: 18rem;
+        grid-row-gap: 1rem;
+        color: #00008b;
+
+        strong {
+            font-size: 19px;
+            color: #00008b;
+        }
+
+        .inp {
+            border: 2px solid #f7c0c0;
+            border-radius: 8px;
+            color: #16166c !important;
+            padding: 0.6rem 1rem;
+        }
+
+        .result p {
+            font-size: 15px !important;
+            color: red;
+            svg {
+                margin-left: 6px;
+            }
+        }
+    }
+}

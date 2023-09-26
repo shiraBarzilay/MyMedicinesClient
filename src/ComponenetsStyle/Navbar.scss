@@ -1,0 +1,13 @@
+.wrap-navbar {
+    direction: rtl;
+    background-color: #f7c0c075;
+
+    .wrap-navs {
+        padding: 2rem;
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 2rem;
+        width: fit-content;
+        margin-inline: auto;
+    }
+}
