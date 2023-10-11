@@ -8,6 +8,13 @@ export const addNewMedicine = (medicine) => {
     }
 }
 
+export const addMedicineToUser = (obj) => {
+    return {
+        type: Types.ADD_MEDICINE_TO_USER,
+        payload: obj
+    }
+}
+
 export const getMedicineFromServer = (medicinesArr) => {
     return {
         type: Types.GET_MEDICINE_FROM_SERVER,

@@ -52,4 +52,29 @@ label, p, span, a, div, button {
   left: inherit !important;
   right: 1.75rem !important;
   transform-origin: right !important;
-}                                                                                                                                                                  
+}
+
+.dialog {
+  direction: rtl;
+}
+
+.dialog .MuiPaper-root {
+  min-width: 22rem;
+}
+
+.dialog .wrap-medicines-list {
+  display: flex;
+  align-items: end;
+  border: solid 1px #dce8f4;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.dialog .wrap-medicines-list img {
+  height: 5rem;
+}
+
+.dialog .wrap-medicines-list button {
+  margin-right: auto;
+}

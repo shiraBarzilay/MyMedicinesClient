@@ -13,13 +13,7 @@ import { Add, Check, Close } from '@mui/icons-material';
 import { ExclamationTriangleFill } from 'react-bootstrap-icons';
 import { addNewMedicine, getMedicineFromServer } from '../store/actions/medicine';
 import { useRef } from 'react';
-
-const frequency = [
-  'פעם בשבוע',
-  'פעמיים בשבוע',
-  'כל יומיים',
-  'כל יום'
-];
+import AddExistingMedicineToUser from './AddExistingMedicineToUser';
 
 const Medicines = (props) => {
   const [medicines, setMedicines] = useState([]);
@@ -33,7 +27,6 @@ const Medicines = (props) => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const [selectedMedicine, setSelectedMedicine] = useState(null);
-  const [selectedFreq, setSelectedFreq] = useState([]);
 
   const fileInputRef = useRef();
 
@@ -44,6 +37,12 @@ const Medicines = (props) => {
   useEffect(() => {
     getMedicines();
   }, [currentUser]);
+
+  useEffect(() => {
+    if (openDialog == false) {
+      getMedicines();
+    }
+  }, [openDialog]);
 
   const getMedicines = async () => {
     let result;
@@ -79,10 +78,6 @@ const Medicines = (props) => {
 
   const handleSnackClose = () => {
     setOpenSnackBar(false);
-  };
-
-  const handleDialogClose = () => {
-    setOpenDialog(false);
   };
 
   const resetForm = () => {
@@ -126,16 +121,6 @@ const Medicines = (props) => {
       setErrorMsg("יש למלא את כל שדות החובה");
     }
   }
-
-  const handleSelectedChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedFreq(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
 
   const handleSelectMedicine = (medicine) => {
     setOpenDialog(true);
@@ -203,44 +188,8 @@ const Medicines = (props) => {
       </Snackbar>
 
       {/* add existing medicine to user */}
-      <Dialog dir="rtl" open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>הוספת תרופה ליומן</DialogTitle>
-        <DialogContent>
-          <p>
-            הגדר שעה וימים בהם אתה צריך לקחת {selectedMedicine?.medicineName}.
-          </p>
-          {selectedMedicine && selectedMedicine.medicineImage && <img src={`https://localhost:44378/api/Images/${selectedMedicine.medicineImage}`} height={100}/>}
-          <TextField
-            dir="rtl"
-            autoFocus
-            margin="dense"
-            id="TakingHour"
-            label="שעת לקיחה"
-            type="time"
-            fullWidth
-            variant="standard"
-          />
-          <br />
-          <br />
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">בחר תדירות</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedFreq}
-              label="בחר תדירות"
-              onChange={handleSelectedChange}
-            >
-              {frequency.map((option, i) => <MenuItem key={i} value={frequency.indexOf(option)}>{option}</MenuItem>)}
-            </Select>
-          </FormControl>
-
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}>ביטול</Button>
-          <Button onClick={handleDialogClose}>הוסף תרופה ליומן</Button>
-        </DialogActions>
-      </Dialog>
+      <AddExistingMedicineToUser openDialog={openDialog} selectedMedicine={selectedMedicine} setOpenDialog={(val) => setOpenDialog(val)}
+          currentUser={currentUser} />
     </div>
   )
 };

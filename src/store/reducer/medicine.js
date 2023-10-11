@@ -1,4 +1,3 @@
-import utils from "../../utils";
 import * as Types from "../actions/Types";
 
 
@@ -11,6 +10,12 @@ export const medicineReducer = async (state = initialState, action) => {
         case Types.ADD_NEW_MEDICINE:
             return {
                 medicinesArr: [state.medicinesArr, action.payload]
+            }
+        case Types.ADD_MEDICINE_TO_USER:
+            const medicines = [...state.medicinesArr];
+            medicines[medicines.indexOf(action.payload.medicine)].isExist_ToCurrentUser = true;
+            return {
+                medicinesArr: [...medicines]
             }
         case Types.GET_MEDICINE_FROM_SERVER:
             return { medicinesArr: action.payload }

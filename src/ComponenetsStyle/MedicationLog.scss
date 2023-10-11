@@ -1,0 +1,56 @@
+table,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  font-size: 30px !important;
+  /* width: 80px; */
+  margin-right: 520px;
+  margin-top: 10px;
+}
+
+th,
+td {
+  background-color: #96D4D4;
+  font-size: 40px;
+  margin-left: 2px !important;
+}
+
+body {
+  background-image: none !important;
+}
+
+.wrap-log {
+  display: grid;
+  grid-auto-flow: column;
+  text-align: center;
+  min-width: 45rem;
+  margin: 3rem auto;
+
+  .wrap-hour {
+    background-color: aliceblue;
+    padding: 1rem;
+    margin: 0.4rem 0.2rem;
+    color: #0046ae;
+    min-height: 8.5rem;
+    border: solid 1px transparent;
+
+    &.exist {
+      border-color: #0046ae24;
+    }
+
+    .wrap-medicines {
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      margin: 0;
+
+      .medicine {
+        color: #db9c9c;
+        display: block;
+      }
+    }
+  }
+}
