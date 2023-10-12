@@ -4,22 +4,22 @@ import { Day, Hour } from "./AddExistingMedicineToUser";
 import utils from "../utils";
 import { useSelector } from "react-redux";
 import DayInDiary from "./DayInDiary";
+import { useNavigate } from "react-router-dom";
 
 //יומן תרופות
 export default function MedicationLog() {
-
-  // const [medicines, setMedicines] = useState([]);
-  // const [initilizeLog, setInitilizeLog] = useState([]);
   const [log, setLog] = useState([]);
   const currentUser = useSelector(store => store.userReducer.currentUser);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!currentUser) {
+      alert("יש להתחבר לאתר")
+      navigate("/home");
+    }
     createLog();
   }, []);
-
-  // useEffect(() => {
-  //   getMedicinesToUser();
-  // }, [initilizeLog]);
 
   const createLog = async () => {
     let _log = [];
@@ -38,8 +38,8 @@ export default function MedicationLog() {
       for (let i = 0; i < medicines.length; i++) {
         _log[medicines[i].takingDay - 1].hours[medicines[i].takingHour.hours + ":00"].push(medicines[i]);
       }
-      setLog(() => (_log));
     }
+    setLog(() => (_log));
   }
 
   const getMedicinesToUser = async () => {
@@ -171,7 +171,8 @@ export default function MedicationLog() {
         </tr>
       </table> */}
       <div className="wrap-log">
-        {log.length > 0 && log.map((dayInWeek, i) => <DayInDiary key={i} dayInWeek={dayInWeek} updateLog={createLog} />)}
+        {log != null && log.length > 0 && log.map((dayInWeek, i) => <DayInDiary key={i} dayInWeek={dayInWeek} updateLog={createLog} />)}
+        {/* {log != null && log.length > 0 && log.map((dayInWeek, i) => <p>yes</p>)} */}
       </div>
     </>
   )

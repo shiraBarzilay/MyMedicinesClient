@@ -123,8 +123,14 @@ const Medicines = (props) => {
   }
 
   const handleSelectMedicine = (medicine) => {
-    setOpenDialog(true);
-    setSelectedMedicine(medicine);
+    if (!currentUser) {
+      setResultForm({ message: "כדי להוסיף תרופות ליומן יש להתחבר לאתר", severity: "info" });
+      setOpenSnackBar(true);
+    }
+    else {
+      setOpenDialog(true);
+      setSelectedMedicine(medicine);
+    }
   }
 
   const nav = () => {
@@ -143,6 +149,7 @@ const Medicines = (props) => {
         sx={{ width: 250 }}
         options={medicines}
         autoHighlight
+        onChange={(event, value) => handleSelectMedicine(value)}
         getOptionLabel={(option) => option.medicineName + " (" + option.medicineEnglishName + ")"}
         renderInput={(params) => (
           <TextField
@@ -189,7 +196,7 @@ const Medicines = (props) => {
 
       {/* add existing medicine to user */}
       <AddExistingMedicineToUser openDialog={openDialog} selectedMedicine={selectedMedicine} setOpenDialog={(val) => setOpenDialog(val)}
-          currentUser={currentUser} />
+        currentUser={currentUser} />
     </div>
   )
 };

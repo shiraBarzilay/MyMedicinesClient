@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
 import HourInDay from './HourInDay';
 import utils from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 const DayInDiary = (props) => {
     const [open, setOpen] = useState(false);
@@ -9,6 +10,8 @@ const DayInDiary = (props) => {
     const [medicines, setMedicines] = useState(null);
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [resultForm, setResultForm] = useState({ message: "", severity: "" });
+
+    const navigate = useNavigate();
 
     const handleClickOpen = (hour, i) => {
         setOpen(true);
@@ -44,7 +47,7 @@ const DayInDiary = (props) => {
             <div className="wrap-title"><strong>{props.dayInWeek.day}</strong></div>
             {Object.keys(props.dayInWeek.hours).map((hour, i) => <HourInDay key={i} i={i} hour={hour} dayInWeek={props.dayInWeek}
                 onClick={() => handleClickOpen(hour, i)} />)}
-
+            
             <Dialog
                 className="dialog"
                 open={open}
@@ -57,7 +60,7 @@ const DayInDiary = (props) => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {medicines && medicines.map((medicine, i) =>
+                        {medicines && medicines.length != 0 && medicines.map((medicine, i) =>
                             <div key={i} className="wrap-medicines-list">
                                 <div>
                                     <img src={`https://localhost:44378/api/Images/${medicine.medicineImage}`}
@@ -66,6 +69,8 @@ const DayInDiary = (props) => {
                                 </div>
                                 <Button type="button" onClick={() => removeMedicine(medicine)}>הסר תרופה זו</Button>
                             </div>)}
+                        {(!medicines || medicines.length == 0) && <p>לא קיימות תרופות ללקיחה בשעה זו :)</p>}
+                        <laebl style={{color: "#d75e5e"}}>להוספת תרופה בחר ב<strong style={{cursor: "pointer"}} onClick={() => navigate("/medicines")}>דף התרופות</strong></laebl>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

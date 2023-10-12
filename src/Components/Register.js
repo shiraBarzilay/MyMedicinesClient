@@ -57,7 +57,7 @@ const Register = (props) => {
             let result = await utils.signUp(user);
             console.log(result);
             if (result.data != null && result.data != "") {
-                props.signUp(user);
+                props.signUp(result.data);
                 navigate("/medicationLog");
             }
             else {
