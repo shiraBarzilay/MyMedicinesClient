@@ -7,7 +7,7 @@ export default function NavbarUser() {
         <div className="wrap-navbar">
             <div className="wrap-navs">
                 <Link to="/home" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link1" >דף הבית</Link>
-                <Link to="/register" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link2" >התחברות</Link>
+                <Link to="/register" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link2" >הרשמה</Link>
                 <Link to="/medicines" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link4" >תרופות</Link>
                 <Link to="/aboutUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link3" >אודות</Link>
                 <Link to="/contactUs" style={{ textDecoration: 'none', color: '#00008B', fontSize: '23px' }} className="nav-link5" >צור קשר</Link>
