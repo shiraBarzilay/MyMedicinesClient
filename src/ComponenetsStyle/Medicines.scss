@@ -15,7 +15,9 @@
         flex-wrap: wrap;
     }
 
-    .buttonAddMedicine, .buttonClose, .submitButton {
+    .buttonAddMedicine,
+    .buttonClose,
+    .submitButton {
         border: none;
         color: #ffffff;
         padding: 10px 20px;
@@ -30,7 +32,8 @@
         }
     }
 
-    .buttonAddMedicine, .buttonClose {
+    .buttonAddMedicine,
+    .buttonClose {
         margin-top: 1rem;
     }
 
@@ -60,9 +63,33 @@
         .result p {
             font-size: 15px !important;
             color: red;
+
             svg {
                 margin-left: 6px;
             }
         }
     }
+}
+
+.date-input {
+    padding: 0.6rem 1rem;
+    border: 1px solid #969696;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #16166c !important;
+    &:visited {
+        border-color: #3737da;
+    }
+    // &::-webkit-calendar-picker-indicator {
+    //     opacity: 0.5;
+    //     display: clock;
+    //     top :0;
+    //     left: 0;
+    //     // -webkit-appearance: none;
+    // }
+    // appearance: none;
+}
+
+.date-label {
+    left: 25px !important;
 }

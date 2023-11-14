@@ -2,7 +2,7 @@ import * as Types from "../actions/userMedicine";
 
 const initialState={
     userMedicinesArr:[],
-    curretntUserMedicine:{},
+    curretntUserMedicine:[],
 }
 
 export const userMedicineReducer=(state=initialState,action)=>{
@@ -11,7 +11,7 @@ switch(action){
         return{
             userMedicinesArr:[...state.userMedicinesArr,action]   
         }
-    case Types.updateDetailsOfMedicine:
+    case Types.SET_USER_MEDICINES:
         return{
              ...state,
              curretntUserMedicine:action.payload

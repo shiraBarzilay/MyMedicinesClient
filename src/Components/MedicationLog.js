@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import "../ComponenetsStyle/MedicationLog.scss";
 import { Day, Hour } from "./AddExistingMedicineToUser";
 import utils from "../utils";
-import { useSelector } from "react-redux";
-import DayInDiary from "./DayInDiary";
+import { useSelector, connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setUserMedicines } from '../store/actions/user';
+import { Calendar } from "./Calendar";
 
 //יומן תרופות
-export default function MedicationLog() {
+ function MedicationLog(props) {
   const [log, setLog] = useState([]);
   const currentUser = useSelector(store => store.userReducer.currentUser);
+  const [showDetails, setShowDetails] = useState(false);
+  const [data, setData] = useState(null);
+
+  const showDetailsHandle = (dayStr) => {
+    setData(dayStr);
+    setShowDetails(true);
+  };
+
 
   const navigate = useNavigate();
 
@@ -35,8 +44,13 @@ export default function MedicationLog() {
     let medicines = await getMedicinesToUser();
 
     if (_log.length > 0) {
-      for (let i = 0; i < medicines.length; i++) {
-        _log[medicines[i].takingDay - 1].hours[medicines[i].takingHour.hours + ":00"].push(medicines[i]);
+      for (let i = 0; i < medicines?.length; i++) {
+        const { startingDate, lastUpdatedDate } = medicines[i] || {};
+        const days = Array.from({ length: (lastUpdatedDate - startingDate) / (24 * 60 * 60 * 1000) + 1 }, (_, index) => new Date(startingDate.getTime() + index * 24 * 60 * 60 * 1000))
+          .map(date => date.getDay());
+        days.forEach(element => {
+          _log[element].hours[medicines[i].takingHour.hours + ":00"].push(medicines[i]);
+        });
       }
     }
     setLog(() => (_log));
@@ -45,7 +59,8 @@ export default function MedicationLog() {
   const getMedicinesToUser = async () => {
     if (currentUser != null) {
       let result = await utils.getMedicinesToUser(currentUser.userId);
-      // await setMedicines(result.data);
+      // Save in redux
+      props._setUserMedicines(result.data);
       return result.data;
     }
   }
@@ -55,125 +70,20 @@ export default function MedicationLog() {
   }
 
   return (
-    <>
-      {/* <table >
-        <tr>
-          <th>ראשון</th>
-          <th>שני</th>
-          <th>שלישי</th>
-          <th>רביעי</th>
-          <th>חמישי</th>
-          <th>שישי</th>
-        </tr>
-        <tr>
-          <button onClick={changeColor}>10:00</button>
-          <td>10:00</td>
-          <td>10:00</td>
-          <td>10:00</td>
-          <td>10:00</td>
-          <td>10:00</td>
-        </tr>
-        <tr>
-          <td>11:00</td>
-          <td>11:00</td>
-          <td>11:00</td>
-          <td>11:00</td>
-          <td>11:00</td>
-          <td>11:00</td>
-        </tr>
-        <tr>
-          <td>12:00</td>
-          <td>12:00</td>
-          <td>12:00</td>
-          <td>12:00</td>
-          <td>12:00</td>
-          <td>12:00</td>
-        </tr>
-        <tr>
-          <td>13:00</td>
-          <td>13:00</td>
-          <td>13:00</td>
-          <td>13:00</td>
-          <td>13:00</td>
-          <td>13:00</td>
-        </tr>
-        <tr>
-          <td>14:00</td>
-          <td>14:00</td>
-          <td>14:00</td>
-          <td>14:00</td>
-          <td>14:00</td>
-          <td>14:00</td>
-        </tr>
-        <tr>
-          <td>15:00</td>
-          <td>15:00</td>
-          <td>15:00</td>
-          <td>15:00</td>
-          <td>15:00</td>
-          <td>15:00</td>
-        </tr>
-        <tr>
-          <td>16:00</td>
-          <td>16:00</td>
-          <td>16:00</td>
-          <td>16:00</td>
-          <td>16:00</td>
-          <td>16:00</td>
-        </tr>
-        <tr>
-          <td>17:00</td>
-          <td>17:00</td>
-          <td>17:00</td>
-          <td>17:00</td>
-          <td>17:00</td>
-          <td>17:00</td>
-        </tr>
-        <tr>
-          <td>18:00</td>
-          <td>18:00</td>
-          <td>18:00</td>
-          <td>18:00</td>
-          <td>18:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>19:00</td>
-          <td>19:00</td>
-          <td>19:00</td>
-          <td>19:00</td>
-          <td>19:00</td>
-          <td>19:00</td>
-        </tr>
-        <tr>
-          <td>20:00</td>
-          <td>20:00</td>
-          <td>20:00</td>
-          <td>20:00</td>
-          <td>20:00</td>
-          <td>20:00</td>
-        </tr>
-        <tr>
-          <td>21:00</td>
-          <td>21:00</td>
-          <td>21:00</td>
-          <td>21:00</td>
-          <td>21:00</td>
-          <td>21:00</td>
-        </tr>
-        <tr>
-          <td>22:00</td>
-          <td>22:00</td>
-          <td>22:00</td>
-          <td>22:00</td>
-          <td>22:00</td>
-          <td>22:00</td>
-        </tr>
-      </table> */}
-      <div className="wrap-log">
-        {log != null && log.length > 0 && log.map((dayInWeek, i) => <DayInDiary key={i} dayInWeek={dayInWeek} updateLog={createLog} />)}
-        {/* {log != null && log.length > 0 && log.map((dayInWeek, i) => <p>yes</p>)} */}
-      </div>
-    </>
+    <div className="wrap-log">
+      {/* {log != null && log.length > 0 && log.map((dayInWeek, i) =>
+          <DayInDiary key={i} dayInWeek={dayInWeek} updateLog={createLog} offset={0} />)}
+        {log != null && log.length > 0 && log.map((dayInWeek, i) => <p>yes</p>)} */}
+      <Calendar showDetailsHandle={showDetailsHandle} />
+      <br />
+      {/* {showDetails && <Details data={data} />} */}
+    </div>
   )
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      _setUserMedicines: (medicines) => dispatch(setUserMedicines(medicines))
+  };
+};
+export default connect(null, mapDispatchToProps)(MedicationLog);

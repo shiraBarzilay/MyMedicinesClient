@@ -8,11 +8,3 @@ return{
     payload:detailOneMedicine
 }
 }
-
-// עדכון פרטי תרופה שהלקוח לוקח (מינון לקיחה,ימי לקיחה וכד)
-export const updateDetailsOfMedicine=(detailOneMedicine)=>{
-    return{
-        type:Types.UPDATE_DETAILS_OF_MEDICINE,
-        payload:detailOneMedicine
-    }
-}

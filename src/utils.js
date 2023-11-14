@@ -34,13 +34,15 @@ const addMedicine = async (imageFile, medicine) => {
     return await axios.post(`${baseUrl}Medicines/AddMedicine`, formData)
 }
 
-const addMedicineToUser = async (userId, medicineId, hour, day) => {
+const addMedicineToUser = async (userId, medicineId, hour, startDate, endDate) => {
     // mtu = medicineToUser
     const mtu = {
         medicineId,
         userId,
         takingHour: new Date("2000-01-01T" + Hour[hour]),
-        takingDay: day + 1
+        takingDay: 1,
+        startingDate: startDate,
+        lastUpdatedDate: endDate
     }
     return await axios.post(`${baseUrl}Users/AddExistingMedicineToUser`, mtu)
 }

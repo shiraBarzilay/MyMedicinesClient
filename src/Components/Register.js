@@ -89,6 +89,8 @@ const Register = (props) => {
         </div>
     )
 }
+
+//?
 const mapDispatchToProps = (dispatch) => {
     return {
         signUp: (user) => dispatch(addNewUser(user))

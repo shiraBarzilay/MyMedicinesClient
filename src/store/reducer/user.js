@@ -2,7 +2,8 @@ import * as Types from "../actions/Types";
 
 const initialState = {
   usersArr: [],
-  currentUser: null
+  currentUser: null,
+  curretntUserMedicine: []
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -13,11 +14,11 @@ export const userReducer = (state = initialState, action) => {
         usersArr: [...state.usersArr, action.payload],
         currentUser: action.payload
       }
-      case Types.LOGIN:
-        return {
-          ...state,
-          currentUser: action.payload
-        }
+    case Types.LOGIN:
+      return {
+        ...state,//משאירה את עדכון הUSER
+        currentUser: action.payload
+      }
     case Types.DELETE_USER:
       let arr = state.usersArr.filter(user => user.UserId !== action.payload)
       let currentUser = state.currentUser;
@@ -28,6 +29,11 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         usersArr: arr,
         currentUser
+      }
+    case Types.SET_USER_MEDICINES:
+      return {
+        ...state,
+        curretntUserMedicine: action.payload
       }
     default: return state;
   }

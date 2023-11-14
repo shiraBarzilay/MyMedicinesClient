@@ -40,14 +40,17 @@ const DayInDiary = (props) => {
                 setOpenSnackBar(true);
             }
         });
-    }
+    };
+
+    // const fromDate = new Date() - props.offset + 7;
+    // const toDate = new Date();
 
     return (
         <div className="wrap-column">
             <div className="wrap-title"><strong>{props.dayInWeek.day}</strong></div>
             {Object.keys(props.dayInWeek.hours).map((hour, i) => <HourInDay key={i} i={i} hour={hour} dayInWeek={props.dayInWeek}
                 onClick={() => handleClickOpen(hour, i)} />)}
-            
+
             <Dialog
                 className="dialog"
                 open={open}
@@ -70,7 +73,7 @@ const DayInDiary = (props) => {
                                 <Button type="button" onClick={() => removeMedicine(medicine)}>הסר תרופה זו</Button>
                             </div>)}
                         {(!medicines || medicines.length == 0) && <p>לא קיימות תרופות ללקיחה בשעה זו :)</p>}
-                        <laebl style={{color: "#d75e5e"}}>להוספת תרופה בחר ב<strong style={{cursor: "pointer"}} onClick={() => navigate("/medicines")}>דף התרופות</strong></laebl>
+                        <laebl style={{ color: "#d75e5e" }}>להוספת תרופה בחר ב<strong style={{ cursor: "pointer" }} onClick={() => navigate("/medicines")}>דף התרופות</strong></laebl>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

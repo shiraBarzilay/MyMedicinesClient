@@ -34,6 +34,8 @@ const Medicines = (props) => {
 
   let navigate = useNavigate();
 
+
+  // 
   useEffect(() => {
     getMedicines();
   }, [currentUser]);
@@ -44,6 +46,7 @@ const Medicines = (props) => {
     }
   }, [openDialog]);
 
+  // 
   const getMedicines = async () => {
     let result;
     if (currentUser != null) {
@@ -75,11 +78,11 @@ const Medicines = (props) => {
       setNewMedicine((prevState) => ({ ...prevState, MedicineImage: e.target.files[0].name }));
     }
   };
-
+// 
   const handleSnackClose = () => {
     setOpenSnackBar(false);
   };
-
+//
   const resetForm = () => {
     setNewMedicine({ MedicineName: "", MedicineEnglishName: "", MedicineDescription: "", MedicineImage: "" });
     fileInputRef.current.files = null;
@@ -103,7 +106,7 @@ const Medicines = (props) => {
     if (newMedicine.MedicineName != "" && newMedicine.MedicineDescription != "", newMedicine.MedicineEnglishName != "") {
       let result = await utils.addMedicine(imageFile, newMedicine);
 
-      if (result.data > 0) {
+      if (result.data > 0) {//הקריאה הצליחה
         newMedicine.MedicineId = result.data;
         let _newMedicine = castFieldsToLowerCase(newMedicine);
         props.addNewMedicine(_newMedicine);
@@ -111,6 +114,10 @@ const Medicines = (props) => {
         setResultForm({ message: "התרופה נוספה בהצלחה!", severity: "success" });
         setOpenSnackBar(true);
         resetForm();
+      }
+      else if(result.data==0){
+        setResultForm({ message: "תרופה זו קיימת במאגר התרופות", severity: "error" });
+        setOpenSnackBar(true);
       }
       else {
         setResultForm({ message: "קרתה תקלה בהוספת התרופה, נסה שוב מאוחר יותר.", severity: "error" });
@@ -125,9 +132,11 @@ const Medicines = (props) => {
   const handleSelectMedicine = (medicine) => {
     if (!currentUser) {
       setResultForm({ message: "כדי להוסיף תרופות ליומן יש להתחבר לאתר", severity: "info" });
+      // ?
       setOpenSnackBar(true);
     }
     else {
+      // ?
       setOpenDialog(true);
       setSelectedMedicine(medicine);
     }
@@ -140,7 +149,6 @@ const Medicines = (props) => {
   return (
     <div className="wrap-medicines-page">
       <h3 className="title">התרופות הפופולאריות לבחירה:</h3>
-
       {/* search-box of medicines by name */}
       <Autocomplete
         id="country-select-demo"
@@ -157,7 +165,7 @@ const Medicines = (props) => {
             label="חיפוש תרופה לפי שם"
             inputProps={{
               ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
+              // autoComplete: 'new-password', // disable autocomplete and autofill
             }}
           />
         )}
@@ -176,8 +184,9 @@ const Medicines = (props) => {
           <strong>הוספת תרופה חדשה:</strong>
           <input name="MedicineName" value={newMedicine.MedicineName} type="text" className="inp" placeholder="שם תרופה" onChange={handleChange} />
           <input name="MedicineEnglishName" value={newMedicine.MedicineEnglishName} type="text" className="inp" placeholder="שם תרופה באנגלית" onChange={handleChange} />
-          <input name="MedicineDescription" value={newMedicine.MedicineDescription} type="text" className="inp" placeholder="תאור תרופה" onChange={handleChange} />
+          <input name="MedicineDescription" value={newMedicine.MedicineDescription} type="text" className="inp" placeholder="תאור תרופה" onChange={handleChange} />    
           <label>תמונה של התרופה:</label>
+          {/* ? */}
           <input type="file" ref={fileInputRef} onChange={(event) => readURL(event)} />
           {src != "" && src != undefined && src != null && <img src={src} height={100} />}
 
@@ -193,7 +202,7 @@ const Medicines = (props) => {
           {resultForm.message}
         </Alert>
       </Snackbar>
-
+{/* // */}
       {/* add existing medicine to user */}
       <AddExistingMedicineToUser openDialog={openDialog} selectedMedicine={selectedMedicine} setOpenDialog={(val) => setOpenDialog(val)}
         currentUser={currentUser} />

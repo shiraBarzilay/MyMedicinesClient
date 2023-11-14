@@ -14,7 +14,7 @@ export default function ContactUs() {
         <br />
         או דרך האיימיל שלנו:
         <br />
-        <Send/> <strong>MyMedicines2022@gmail.com</strong>
+        <Send/> <strong>MyMedicines2023@gmail.com</strong>
       </p>
     </div>
   )

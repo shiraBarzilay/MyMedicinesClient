@@ -5,6 +5,8 @@ import { addMedicineToUser } from '../store/actions/medicine';
 import utils from '../utils';
 
 export const Hour = [
+    '08:00',
+    '09:00',
     '10:00',
     '11:00',
     '12:00',
@@ -16,8 +18,7 @@ export const Hour = [
     '18:00',
     '19:00',
     '20:00',
-    '21:00',
-    '22:00',
+    '21:00'
 ];
 
 export const Day = [
@@ -26,11 +27,13 @@ export const Day = [
     'שלישי',
     'רביעי',
     'חמישי',
-    'שישי'
+    'שישי',
+    'שבת'
 ];
 
 const AddExistingMedicineToUser = (props) => {
-    const [selectedDay, setSelectedDay] = useState("");
+    const [startDate, setSelectedStartDate] = useState(new Date());
+    const [endDate, setSelectedEndDate] = useState(new Date());
     const [selectedHour, setSelectedHour] = useState("");
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [resultForm, setResultForm] = useState({ message: "", severity: "" });
@@ -40,8 +43,12 @@ const AddExistingMedicineToUser = (props) => {
         resetForm();
     };
 
-    const handleSelectedDayChange = (event) => {
-        setSelectedDay(event.target.value);
+    const handleSelectedStartDateChange = (event) => {
+        setSelectedStartDate(event.target.value);
+    };
+
+    const handleSelectedEndDateChange = (event) => {
+        setSelectedEndDate(event.target.value);
     };
 
     const handleSelectedHourChange = (event) => {
@@ -53,15 +60,21 @@ const AddExistingMedicineToUser = (props) => {
     };
 
     const resetForm = () => {
-        setSelectedDay("");
+        setSelectedStartDate("");
         setSelectedHour("");
     };
 
     const addMedicineToUser = () => {
-        if (selectedDay !== "" && selectedHour !== "" && props.selectedMedicine != null) {
-            utils.addMedicineToUser(props.currentUser.userId, props.selectedMedicine.medicineId, selectedHour, selectedDay).then(result => {
+        if (startDate !== "" && selectedHour !== "" && props.selectedMedicine != null) {
+            utils.addMedicineToUser(
+                props.currentUser.userId,
+                props.selectedMedicine.medicineId,
+                selectedHour,
+                startDate,
+                endDate
+            ).then(result => {
                 if (result.data == true) {
-                    props.addMedicineToUser({ user: props.currentUser, medicine: props.selectedMedicine, hour: selectedHour, day: selectedDay });
+                    props.addMedicineToUser({ user: props.currentUser, medicine: props.selectedMedicine, hour: selectedHour, day: startDate });
                     setResultForm({ message: "התרופה נוספה בהצלחה!", severity: "success" });
                     setOpenSnackBar(true);
                     resetForm();
@@ -98,15 +111,30 @@ const AddExistingMedicineToUser = (props) => {
                     <br />
                     <br />
                     <FormControl fullWidth>
-                        <InputLabel>בחר יום</InputLabel>
-                        <Select
+                        <InputLabel  className='date-label'>בחר תאריך התחלה</InputLabel>
+                        {/*} <Select
                             labelId="demo-simple-select-label"
-                            value={selectedDay}
+                            value={startDate}
                             label="בחר יום"
                             onChange={handleSelectedDayChange}
                         >
                             {Day.map((option, i) => <MenuItem key={i} value={Day.indexOf(option)}>{option}</MenuItem>)}
-                        </Select>
+                        </Select> */}
+                        <input type="date" value={startDate} className="date-input" name='startDate' placeholder="תאריך התחלה" onChange={handleSelectedStartDateChange} />
+                    </FormControl>
+                    <br />
+                    <br />
+                    <FormControl fullWidth>
+                        <InputLabel className='date-label'>בחר תאריך סיום</InputLabel>
+                        {/*} <Select
+                            labelId="demo-simple-select-label"
+                            value={startDate}
+                            label="בחר יום"
+                            onChange={handleSelectedDayChange}
+                        >
+                            {Day.map((option, i) => <MenuItem key={i} value={Day.indexOf(option)}>{option}</MenuItem>)}
+                        </Select> */}
+                        <input type="date" value={endDate} className="date-input" name='endDate' placeholder="תאריך סיום" onChange={handleSelectedEndDateChange} />
                     </FormControl>
 
                 </DialogContent>

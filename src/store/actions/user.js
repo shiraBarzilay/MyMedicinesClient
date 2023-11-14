@@ -28,3 +28,11 @@ export const deleteUser = (id) => {
         payload: id
     }
 }
+
+// שמירת תרופות של הלקוח
+export const setUserMedicines=(userMedicines)=>{
+    return{
+        type:Types.SET_USER_MEDICINES,
+        payload:userMedicines
+    }
+}
