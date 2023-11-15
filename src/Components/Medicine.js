@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import '../ComponenetsStyle/Medicine.scss';
 
 const Medicine = (props) => {
-    
+    // תרופה בודדת
+    // טיפול בבחירת תרופה בלחיצה
     return (
         <Card className={"medicine-card " + (props.selected == true ? "selected-card" : "")} sx={{ maxWidth: 230 }} onClick={props.onClick}>
             <CardMedia

@@ -1,6 +1,4 @@
-import React, { Fragment } from 'react';
-// import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-// import 'react-vertical-timeline-component/style.min.css';
+import React from 'react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -12,7 +10,7 @@ import TimelineOppositeContent, {
 } from '@mui/lab/TimelineOppositeContent';
 
 export const DailyMedicines = (props) => {
-    const { medicinesList = [], timelineDetails = [] } = props;
+    const { timelineDetails = [] } = props;
 
     const generateHourList = () => {
         const hours = [];
@@ -22,42 +20,20 @@ export const DailyMedicines = (props) => {
         return hours;
     };
 
-    // הוספת תרופה ליומן- לסדר ויזואלית 
-    // להגביל עד 9 בשעת לקיחה
-    // לבדוק באג בשבועות הבאים
-    // לטפל במייל
-    // לשכפל שבוע ??
-
+    // מקבלת מקומפוננט האב את התרופות שלוקחים ביום מסוים
     const groupedByTime = timelineDetails?.reduce((acc, obj) => {
         acc[obj.takingHour?.hours] = [...(acc[obj.takingHour?.hours] || []), obj];
         return acc;
     }, {});
 
-    // console.log(props.date, 'medicine', medicine, 'group', groupedByTime);
 
     const getMedicineDetails = (hour) => {
         const medicine = groupedByTime[hour.replace(/:00$/, '')];
-        console.log(props.date, 'medicine', medicine, 'hour', hour);
         return (
-            // <VerticalTimelineElement
-            //     className="vertical-timeline-element--work"
-            //     contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            //     contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-            //     date="2011 - present"
-            //     iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            //     icon={<span>--</span>}
-            // >
-            //     <h3 className="vertical-timeline-element-title">{medicine.medicineName}</h3>
-            //     <img src={`${medicine.medicineImage}`} />
-            //     {/* <p>
-            //         Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-            //     </p> */}
-            // </VerticalTimelineElement>
             <TimelineItem key={hour}>
                 <TimelineOppositeContent color="textSecondary">
                     {hour || 'אין שעה'}
                 </TimelineOppositeContent>
-                {/* { ( */}
                 <TimelineSeparator>
                     <TimelineDot
                         variant={medicine?.length ? "outlined" : undefined}
@@ -66,7 +42,7 @@ export const DailyMedicines = (props) => {
                     <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent
-                    // key={_medicineItem.id}
+                // key={_medicineItem.id}
                 >
                     {
                         medicine?.length

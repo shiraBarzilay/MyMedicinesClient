@@ -3,6 +3,9 @@ import { Day, Hour } from "./Components/AddExistingMedicineToUser";
 
 const baseUrl = 'https://localhost:44378/api/';
 
+// דף קריאות לשרת
+// מפנה לקונטרולר בסי שארפ 
+
 const login = async (data) => {
     return await axios.get(`${baseUrl}Users/Login?userEmail=${data.email}&userPassword=${data.password}`);
 }
@@ -20,6 +23,7 @@ const getMedicinesByUser = async (userId) => {
 }
 
 const getSignedMedicines = async (userId) => {
+    // שליפת התרופות שקימות במערכת
     return await axios.get(`${baseUrl}Medicines/GetSignedMedicines?userId=${userId}`);
 }
 

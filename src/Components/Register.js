@@ -51,13 +51,16 @@ const Register = (props) => {
         return isValidation;
     }
 
+    // הרשמה- משתמש חדש
     const register = async (e) => {
         e.preventDefault();
         if (validation()) {
+            // קורא לשרת - סי שארפ שישמור את המשתמש באס קיו אל
             let result = await utils.signUp(user);
             console.log(result);
             if (result.data != null && result.data != "") {
                 props.signUp(result.data);
+                // במקרה של הצלחה
                 navigate("/medicationLog");
             }
             else {

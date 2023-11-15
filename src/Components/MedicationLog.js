@@ -71,12 +71,8 @@ import { Calendar } from "./Calendar";
 
   return (
     <div className="wrap-log">
-      {/* {log != null && log.length > 0 && log.map((dayInWeek, i) =>
-          <DayInDiary key={i} dayInWeek={dayInWeek} updateLog={createLog} offset={0} />)}
-        {log != null && log.length > 0 && log.map((dayInWeek, i) => <p>yes</p>)} */}
       <Calendar showDetailsHandle={showDetailsHandle} />
       <br />
-      {/* {showDetails && <Details data={data} />} */}
     </div>
   )
 }

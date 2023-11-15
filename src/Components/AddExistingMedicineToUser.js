@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { addMedicineToUser } from '../store/actions/medicine';
 import utils from '../utils';
 
+// הוספת תרופה למשתמש, נפתח ע"י קומפוננט מדיסינס כשלוחצים על תרופה כלשהיא
+// פופאפ של הכנסת פרטי תרופה ושמירה בדאטה ביסס
 export const Hour = [
     '08:00',
     '09:00',
@@ -65,15 +67,18 @@ const AddExistingMedicineToUser = (props) => {
     };
 
     const addMedicineToUser = () => {
+        // שמירת נתוני התרופה למשתמש שנוספה ע"י קריאה לסי שארפ ששומר באס קיו אל
+        // התרופה שנוספה נשמרת באס קיו אל בטבלת medicinesToUserTBL
         if (startDate !== "" && selectedHour !== "" && props.selectedMedicine != null) {
             utils.addMedicineToUser(
                 props.currentUser.userId,
                 props.selectedMedicine.medicineId,
-                selectedHour,
-                startDate,
-                endDate
+                selectedHour, // הסטטיס המקומי מועבר לסי שארפ בקריאת אי פי אי
+                startDate,// סטייט מקומי
+                endDate // סטייט מקומי
             ).then(result => {
                 if (result.data == true) {
+                    // הצגת הודעת הצלחה בתחתית הדף
                     props.addMedicineToUser({ user: props.currentUser, medicine: props.selectedMedicine, hour: selectedHour, day: startDate });
                     setResultForm({ message: "התרופה נוספה בהצלחה!", severity: "success" });
                     setOpenSnackBar(true);
@@ -81,6 +86,7 @@ const AddExistingMedicineToUser = (props) => {
                     handleDialogClose();
                 }
                 else {
+                    // הצגת הודעת שגיאה בתחתית הדף
                     setResultForm({ message: "קרתה תקלה בהוספת התרופה, נסה שוב מאוחר יותר.", severity: "error" });
                     setOpenSnackBar(true);
                 }

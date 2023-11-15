@@ -47,16 +47,12 @@ export const Calendar = ({ showDetailsHandle }) => {
         setSelectedDate(day);
         showDetailsHandle(dayStr);
     };
-
+    //הצגת הימים בשבוע 
     const renderHeader = () => {
         const dateFormat = "MMM yyyy";
-        // console.log("selected day", selectedDate);
         return (
             <div className="header row flex-middle">
                 <div className="col col-start">
-                    {/* <div className="icon" onClick={() => changeMonthHandle("prev")}>
-            prev month
-          </div> */}
                 </div>
                 <div className="col col-center">
                     <span>{format(currentMonth, dateFormat, { locale: heLocale })}</span>
@@ -67,6 +63,7 @@ export const Calendar = ({ showDetailsHandle }) => {
             </div>
         );
     };
+    //מציג תאריכים בלוח שנה
     const renderDays = () => {
         const dateFormat = "EEE";
         const days = [];
@@ -98,15 +95,18 @@ export const Calendar = ({ showDetailsHandle }) => {
     // ];
 
     const daysMedicinesDict = {};
-
+    //   ארגון התרופות לפי ימים במילון
+    // 2023-11-15-< [medicine1, medicine2, medicine3]
     const getMedicines = (week, startDate, endDate) => {
+        // סינון התרופות שרלוונטיות לשבוע הזה שמוצג כעת
         const filteredMedicines = medicines.filter(
             ({ startingDate, lastUpdatedDate }) =>
                 new Date(startingDate) <= endDate
                 && new Date(lastUpdatedDate) >= startDate
         );
         console.log("filteredMedicines", filteredMedicines);
-
+        // 01-07 הצגת שבוע 
+        // 03-05 תרופה שלקחת      
         filteredMedicines.map((medicineDetails) => {
             console.log("details", medicineDetails);
 
@@ -114,8 +114,10 @@ export const Calendar = ({ showDetailsHandle }) => {
                 let _date = new Date(medicineDetails.startingDate);
                 _date <= new Date(medicineDetails.lastUpdatedDate);
                 _date = addDays(_date, 1)
+                // מעבר על תאריך 03, 04, 05
+                // מעבר על כל התאריכים שבהם יש לקחת את התרופה
             ) {
-                // return <DailyMedicines timelineDetails={medicineDetails} />
+                //שמירת התרופה במילון
                 daysMedicinesDict[_date?.toDateString()] = [
                     ...daysMedicinesDict[_date?.toDateString()] || [],
                     medicineDetails
@@ -157,6 +159,7 @@ export const Calendar = ({ showDetailsHandle }) => {
                         >
                             <span className="number">{formattedDate}</span>
                             <span className="bg">{formattedDate}</span>
+                            {/* משתמשים במילון תרופות שיצרנו- שולפים את כל התרופות שהתאריך שאנחנו מציגים מצביע עליו */}
                             <DailyMedicines date={day} timelineDetails={daysMedicinesDict[day.toDateString()]} />
                         </div>
                     </>
@@ -192,7 +195,6 @@ export const Calendar = ({ showDetailsHandle }) => {
             {renderDays()}
             {renderCells()}
             {renderFooter()}
-            {/* <DailyMedicines /> */}
         </div>
     );
 };

@@ -12,15 +12,19 @@ const Home = (props) => {
 
     const navigate = useNavigate();
 
-    //?
+    // התחברות
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (formData.email != "" && formData.password != "") {
             console.log("waiting.....");
+            // קריאה לשרת- C#,
+            // שיבדוק אם המשתמש קים ב 
+            // DB- ב SQL
             let result = await utils.login(formData);
             let user = result.data;
             if (user != null && user != "") {
                 props.login(user);
+                // העברה לדף יומן תרופות
                 navigate("/medicationLog");
             }
             else {
